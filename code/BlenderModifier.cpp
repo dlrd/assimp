@@ -311,14 +311,20 @@ void  BlenderModifier_Subdivision :: DoIt(aiNode& out, ConversionData& conv_data
     std::unique_ptr<Subdivider> subd(Subdivider::Create(algo));
     ai_assert(subd);
 
-    aiMesh** const meshes = &conv_data.meshes[conv_data.meshes->size() - out.mNumMeshes];
-    std::unique_ptr<aiMesh*[]> tempmeshes(new aiMesh*[out.mNumMeshes]());
+    if (conv_data.meshes->size() - out.mNumMeshes < conv_data.meshes->size())
+    {
 
-    subd->Subdivide(meshes,out.mNumMeshes,tempmeshes.get(),std::max( mir.renderLevels, mir.levels ),true);
-    std::copy(tempmeshes.get(),tempmeshes.get()+out.mNumMeshes,meshes);
+        aiMesh** const meshes = &conv_data.meshes[conv_data.meshes->size() - out.mNumMeshes];
+        std::unique_ptr<aiMesh*[]> tempmeshes(new aiMesh*[out.mNumMeshes]());
 
-    ASSIMP_LOG_INFO_F("BlendModifier: Applied the `Subdivision` modifier to `",
-        orig_object.id.name,"`");
+        subd->Subdivide(meshes, out.mNumMeshes, tempmeshes.get(), std::max(mir.renderLevels, mir.levels), true);
+        std::copy(tempmeshes.get(), tempmeshes.get() + out.mNumMeshes, meshes);
+
+        ASSIMP_LOG_INFO_F("BlendModifier: Applied the `Subdivision` modifier to `",
+            orig_object.id.name, "`");
+    }
+    else 
+        ai_assert(false); // Hum ! see https://github.com/assimp/assimp/issues/1325
 }
 
 #endif // ASSIMP_BUILD_NO_BLEND_IMPORTER
