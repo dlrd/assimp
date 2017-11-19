@@ -942,27 +942,29 @@ if (ASSIMP_ANDROID_JNIIOSYSTEM)
     COMPONENT assimp-dev)
 endif(ASSIMP_ANDROID_JNIIOSYSTEM)
 
-if(MSVC AND ASSIMP_INSTALL_PDB)
-  IF(CMAKE_GENERATOR MATCHES "^Visual Studio")
-    install(FILES ${Assimp_BINARY_DIR}/code/Debug/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
-      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
-      CONFIGURATIONS Debug
-    )
-    install(FILES ${Assimp_BINARY_DIR}/code/RelWithDebInfo/assimp${LIBRARY_SUFFIX}.pdb
-      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
-      CONFIGURATIONS RelWithDebInfo
-    )
-  ELSE()
-    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
-      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
-      CONFIGURATIONS Debug
-    )
-    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}.pdb
-      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
-      CONFIGURATIONS RelWithDebInfo
-    )
-  ENDIF()
-endif ()
+#D/LABS
+#if(MSVC AND ASSIMP_INSTALL_PDB)
+#  IF(CMAKE_GENERATOR MATCHES "^Visual Studio")
+#    install(FILES ${Assimp_BINARY_DIR}/code/Debug/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
+##      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
+#      CONFIGURATIONS Debug
+#    )
+#    install(FILES ${Assimp_BINARY_DIR}/code/RelWithDebInfo/assimp${LIBRARY_SUFFIX}.pdb
+#      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
+#      CONFIGURATIONS RelWithDebInfo
+#    )
+#  ELSE()
+#    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
+#      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
+#      CONFIGURATIONS Debug
+#    )
+#    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}.pdb
+#      DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
+#      CONFIGURATIONS RelWithDebInfo
+#    )
+#  ENDIF()
+#endif ()
+#D/LABS
 
 if (ASSIMP_COVERALLS)
     include(Coveralls)
