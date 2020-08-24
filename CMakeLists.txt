@@ -299,9 +299,6 @@ ENDIF( SYSTEM_IRRXML )
 # Search for external dependencies, and build them from source if not found
 # Search for zlib
 IF ( NOT ASSIMP_BUILD_ZLIB )
-    if(POLICY CMP0074)
-       cmake_policy(SET CMP0074 OLD)  # SMODE Silent find_package(ZLib) Warning
-    endif()
     find_package(ZLIB)
 ENDIF( NOT ASSIMP_BUILD_ZLIB )
 
